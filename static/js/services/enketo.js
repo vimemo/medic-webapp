@@ -524,6 +524,25 @@ angular.module('inboxServices').service('Enketo',
       form.output.update();
     };
 
+    var makeInputsRelevant = function(form) {
+      var inputs = form.getRelatedNodes('data-relevant', '[name="/'+ form.model.rootElement.tagName +'/inputs"]');
+      if (inputs.length) {
+        var $node = $(inputs.first());
+        var relevant = form.input.getRelevant( $node );
+        var index = form.input.getIndex( $node );
+        var path = form.input.getName( $node );
+
+        var evaluate = form.model.evaluate;
+        form.model.evaluate = function(expr, resTypeStr, selector, idx) {
+          if (expr === relevant && selector === path && idx === index) {
+            return true;
+          }
+
+          return evaluate.apply(form.model, arguments);
+        };
+      }
+    };
+
     this.save = function(formInternalId, form, geolocation, docId) {
       return $q.resolve(form.validate())
         .then(function(valid) {
@@ -536,6 +555,7 @@ angular.module('inboxServices').service('Enketo',
           return create(formInternalId);
         })
         .then(function(doc) {
+          makeInputsRelevant(form);
           return xmlToDocs(doc, form.getDataStr({ irrelevant: false }));
         })
         .then(function(docs) {

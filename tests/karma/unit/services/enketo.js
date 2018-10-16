@@ -78,6 +78,8 @@ describe('Enketo service', function() {
       form = {
         validate: sinon.stub(),
         getDataStr: sinon.stub(),
+        getRelatedNodes: sinon.stub().returns({ first: sinon.stub() }),
+        model: { rootElement: { tagName: '' } }
       },
       AddAttachment = sinon.stub(),
       EnketoForm = sinon.stub(),
@@ -93,7 +95,7 @@ describe('Enketo service', function() {
     EnketoForm.returns({
       init: enketoInit,
       calc: { update: function() {} },
-      output: { update: function() {} },
+      output: { update: function() {} }
     });
 
     XmlForm.returns(Promise.resolve({ id: 'abc' }));
