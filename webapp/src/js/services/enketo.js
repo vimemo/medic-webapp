@@ -9,6 +9,7 @@ angular.module('inboxServices').service('Enketo',
     $log,
     $q,
     $translate,
+    $timeout,
     $window,
     AddAttachment,
     ContactSummary,
@@ -145,7 +146,7 @@ angular.module('inboxServices').service('Enketo',
 
     var handleKeypressOnInputField = function(e) {
       // Here we capture both CR and TAB characters, and handle field-skipping
-      if(!window.medicmobile_android || (e.keyCode !== 9 && e.keyCode !== 13)) {
+      if(!$window.medicmobile_android || (e.keyCode !== 9 && e.keyCode !== 13)) {
         return;
       }
 
@@ -169,7 +170,7 @@ angular.module('inboxServices').service('Enketo',
             // Delay focussing on the next field, so that keybaord close and
             // open events both register.  This should mean that the on-screen
             // keyboard is maintained between fields.
-            setTimeout(function() {
+            $timeout(function() {
               $nextQuestion.first().trigger('focus');
             }, 10);
           }
@@ -278,7 +279,7 @@ angular.module('inboxServices').service('Enketo',
         wrapper.find('input').on('keydown', handleKeypressOnInputField);
 
         // handle page turning using browser history
-        window.history.replaceState({ enketo_page_number: 0 }, '');
+        $window.history.replaceState({ enketo_page_number: 0 }, '');
         overrideNavigationButtons(currentForm, wrapper);
         addPopStateHandler(currentForm, wrapper);
         forceRecalculate(currentForm);
@@ -294,7 +295,7 @@ angular.module('inboxServices').service('Enketo',
           form.pages.next()
             .then(function(newPageIndex) {
               if(typeof newPageIndex === 'number') {
-                window.history.pushState({ enketo_page_number: newPageIndex }, '');
+                $window.history.pushState({ enketo_page_number: newPageIndex }, '');
               }
               forceRecalculate(form);
             });
@@ -304,14 +305,14 @@ angular.module('inboxServices').service('Enketo',
       $wrapper.find('.btn.previous-page')
         .off('.pagemode')
         .on('click.pagemode', function() {
-          window.history.back();
+          $window.history.back();
           forceRecalculate(form);
           return false;
         });
     };
 
     var addPopStateHandler = function(form, $wrapper) {
-      $(window).on('popstate.enketo-pagemode', function(event) {
+      $($window).on('popstate.enketo-pagemode', function(event) {
         if(event.originalEvent &&
             event.originalEvent.state &&
             typeof event.originalEvent.state.enketo_page_number === 'number') {
@@ -558,7 +559,7 @@ angular.module('inboxServices').service('Enketo',
     };
 
     this.unload = function(form) {
-      $(window).off('.enketo-pagemode');
+      $($window).off('.enketo-pagemode');
       if (form) {
         form.resetView();
       }
