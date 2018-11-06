@@ -73,7 +73,7 @@ module.exports = {
       // process new contacts
       mutingUtils.updateContact(change.doc, true);
       return mutingUtils
-        .updateRegistrations(mutingUtils.getSubjectIds(change.doc), true)
+        .updateRegistrations(utils.getSubjectIds(change.doc), true)
         .then(() => true);
     }
 

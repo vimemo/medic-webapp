@@ -1,11 +1,9 @@
-const _ = require('underscore'),
-      db = require('../db-pouch'),
+const db = require('../db-pouch'),
       lineage = require('lineage')(Promise, db.medic),
       utils = require('./utils'),
       moment = require('moment');
 
-const SUBJECT_PROPERTIES = ['_id', 'patient_id', 'place_id'],
-      BATCH_SIZE = 50;
+const BATCH_SIZE = 50;
 
 const getContact = doc => {
   const contactId = doc.fields &&
@@ -78,8 +76,6 @@ const updateRegistrations = (subjectIds, muted) => {
     });
 };
 
-const getSubjectIds = contact => _.values(_.pick(contact, SUBJECT_PROPERTIES));
-
 const getContactsAndSubjectIds = (contactIds) => {
   return db.medic
     .allDocs({ keys: contactIds, include_docs: true })
@@ -92,7 +88,7 @@ const getContactsAndSubjectIds = (contactIds) => {
           return;
         }
         contacts.push(row.doc);
-        subjectIds.push(...getSubjectIds(row.doc));
+        subjectIds.push(...utils.getSubjectIds(row.doc));
       });
 
       return { contacts, subjectIds };
@@ -162,7 +158,6 @@ module.exports = {
   updateContact: updateContact,
   getContact: getContact,
   updateRegistrations: updateRegistrations,
-  getSubjectIds: getSubjectIds,
   isMutedInLineage: isMutedInLineage,
   unmuteMessages: unmuteMessages,
   muteUnsentMessages: muteUnsentMessages,

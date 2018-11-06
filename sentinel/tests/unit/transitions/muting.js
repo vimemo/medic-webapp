@@ -3,7 +3,8 @@ const sinon = require('sinon'),
       chai = require('chai'),
       transitionUtils = require('../../../src/transitions/utils'),
       mutingUtils = require('../../../src/lib/muting_utils'),
-      transition = require('../../../src/transitions/muting');
+      transition = require('../../../src/transitions/muting'),
+      utils = require('../../../src/lib/utils');
 
 describe('Muting transition', () => {
   afterEach(() => sinon.restore());
@@ -13,10 +14,11 @@ describe('Muting transition', () => {
 
     sinon.stub(mutingUtils, 'isMutedInLineage');
     sinon.stub(mutingUtils, 'updateContact');
-    sinon.stub(mutingUtils, 'getSubjectIds');
     sinon.stub(mutingUtils, 'updateRegistrations');
     sinon.stub(mutingUtils, 'updateMuteState');
     sinon.stub(mutingUtils, 'getContact');
+
+    sinon.stub(utils, 'getSubjectIds');
   });
 
   describe('init', () => {
@@ -105,14 +107,14 @@ describe('Muting transition', () => {
       it('should update the contact', () => {
         const doc = { _id: 'id', type: 'person', patient_id: 'patient' };
         mutingUtils.updateRegistrations.resolves();
-        mutingUtils.getSubjectIds.returns(['id', 'patient']);
+        utils.getSubjectIds.returns(['id', 'patient']);
 
         return transition.onMatch({ doc }).then(result => {
           chai.expect(result).to.equal(true);
           chai.expect(mutingUtils.updateContact.callCount).to.equal(1);
           chai.expect(mutingUtils.updateContact.args[0]).to.deep.equal([doc, true]);
-          chai.expect(mutingUtils.getSubjectIds.callCount).to.equal(1);
-          chai.expect(mutingUtils.getSubjectIds.args[0]).to.deep.equal([doc]);
+          chai.expect(utils.getSubjectIds.callCount).to.equal(1);
+          chai.expect(utils.getSubjectIds.args[0]).to.deep.equal([doc]);
           chai.expect(mutingUtils.updateRegistrations.callCount).to.equal(1);
           chai.expect(mutingUtils.updateRegistrations.args[0]).to.deep.equal([['id', 'patient'], true]);
         });
@@ -121,7 +123,7 @@ describe('Muting transition', () => {
       it('should throw updateRegistrations errors', () => {
         const doc = { _id: 'id', type: 'person', patient_id: 'patient' };
         mutingUtils.updateRegistrations.rejects({ some: 'error' });
-        mutingUtils.getSubjectIds.returns(['id', 'patient']);
+        utils.getSubjectIds.returns(['id', 'patient']);
 
         return transition
           .onMatch({ doc })
@@ -130,8 +132,8 @@ describe('Muting transition', () => {
             chai.expect(err).to.deep.equal({ some: 'error' });
             chai.expect(mutingUtils.updateContact.callCount).to.equal(1);
             chai.expect(mutingUtils.updateContact.args[0]).to.deep.equal([doc, true]);
-            chai.expect(mutingUtils.getSubjectIds.callCount).to.equal(1);
-            chai.expect(mutingUtils.getSubjectIds.args[0]).to.deep.equal([doc]);
+            chai.expect(utils.getSubjectIds.callCount).to.equal(1);
+            chai.expect(utils.getSubjectIds.args[0]).to.deep.equal([doc]);
             chai.expect(mutingUtils.updateRegistrations.callCount).to.equal(1);
             chai.expect(mutingUtils.updateRegistrations.args[0]).to.deep.equal([['id', 'patient'], true]);
           });
