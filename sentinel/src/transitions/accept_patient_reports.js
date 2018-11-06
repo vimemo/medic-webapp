@@ -162,22 +162,15 @@ const addMessagesToDoc = (doc, config, registrations) => {
 };
 
 const handleReport = (doc, config, callback) => {
-  utils.getRegistrations(
-    {
-      db: db,
-      id: doc.fields.patient_id,
-    },
-    (err, registrations) => {
-      if (err) {
-        return callback(err);
-      }
-
+  utils
+    .getReportsBySubject({ db: db.medic, ids: utils.getSubjectIds(doc.patient ), registrations: true })
+    .then(registrations => {
       addMessagesToDoc(doc, config, registrations);
       addRegistrationToDoc(doc, registrations);
 
       module.exports.silenceRegistrations(config, doc, registrations, callback);
-    }
-  );
+    })
+    .catch(err => callback(err));
 };
 
 module.exports = {
