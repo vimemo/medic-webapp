@@ -10,12 +10,6 @@ npm -v
 npm install
 npm ls || true
 
-npm --prefix api install
-npm --prefix sentinel install
+npm install grunt-cli -g
 npm --prefix shared=libs/phone-number install
-./node_modules/bin/webdriver-manager update
-./node_modules/bin/webdriver-manager start > logs/wedriver.log &
-until nc -z localhost 4444; do sleep 1; done
-
-cd shared-libs/phone-number && npm install && cd ../..
 node --stack_size=10000 `which grunt` ci-build
