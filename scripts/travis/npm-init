@@ -7,8 +7,10 @@ if [ ${TEST_SUITE} == "standard" ]; then
 	echo '[medic] skipping grunt'
 	exit 0
 fi
-
+npm cache clean
+npm prune
 npm install
+npm update
 npm ls || true
 npm install -g grunt-cli
 npm --prefix shared-libs/phone-number install
