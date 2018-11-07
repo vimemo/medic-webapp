@@ -2,14 +2,14 @@
 
 npm install -g npm@^5.3.0
 npm -v
-npm install
-npm ls || true
 
-if ! [[ "${TEST_SUITE-}" = "standard" ]]; then
+if [ ${TEST_SUITE} == "standard" ]; then
 	echo '[medic] skipping grunt'
 	exit 0
 fi
 
+npm install
+npm ls || true
 npm install -g grunt-cli
 npm --prefix shared-libs/phone-number install
 node --stack_size=10000 `which grunt` ci-build
