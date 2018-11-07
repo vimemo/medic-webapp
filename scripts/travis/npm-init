@@ -1,14 +1,14 @@
 #!/bin/bash -eu
 
-if ! [[ "${USE_NPM-}" = "true" ]]; then
-	echo '[medic] skipping npm-init'
-	exit 0
-fi
-
 npm install -g npm@^5.3.0
 npm -v
 npm install
 npm ls || true
+
+if ! [[ "${TEST_SUITE-}" = "standard" ]]; then
+	echo '[medic] skipping grunt'
+	exit 0
+fi
 
 npm install -g grunt-cli
 npm --prefix shared-libs/phone-number install
