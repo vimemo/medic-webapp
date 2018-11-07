@@ -4,8 +4,7 @@
   "private": true,
   "version": "0.1.0",
   "engines": {
-    "node": ">=8.11.0",
-    "yarn": "1.7.0"
+    "node": ">=8.11.0"
   },
   "dependencies": {
     "@shared-libs/message-utils": "file:../shared-libs/message-utils",

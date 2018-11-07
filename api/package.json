@@ -8,8 +8,7 @@
     "url": "git://github.com/medic/medic-api.git"
   },
   "engines": {
-    "node": ">=8.11.0",
-    "yarn": "1.7.0"
+    "node": ">=8.11.0"
   },
   "scripts": {
     "toc": "doctoc --github --maxlevel 2 README.md"
