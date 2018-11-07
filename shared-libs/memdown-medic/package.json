@@ -1,6 +1,7 @@
 {
   "name": "memdown-medic",
   "version": "1.0.0",
+  "private": "true",
   "description": "PouchDB instance populated with ddocs",
   "main": "src/memdown-medic.js",
   "scripts": {},

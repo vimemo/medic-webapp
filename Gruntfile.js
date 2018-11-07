@@ -417,7 +417,7 @@ module.exports = function(grunt) {
       },
       'npm-install': {
         cmd: ['webapp', 'api', 'sentinel', 'admin']
-          .map(dir => `echo "[${dir}]" && cd ${dir} && npm install && cd ..`)
+          .map(dir => `echo "[${dir}]" && npm --prefix ${dir} install`)
           .join(' && '),
       },
       'start-webdriver': {
