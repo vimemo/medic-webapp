@@ -37,8 +37,8 @@
   },
   "bundledDependencies": [
     "@shared-libs/message-utils",
-    "@shared-libs/server-checks",
     "@shared-libs/registration-utils",
+    "@shared-libs/server-checks",
     "@shared-libs/tombstone-utils",
     "async",
     "bikram-sambat",
@@ -55,6 +55,7 @@
     "pouchdb-adapter-http",
     "pouchdb-core",
     "pouchdb-mapreduce",
+    "request",
     "task-utils",
     "underscore",
     "uuid",
