@@ -39,12 +39,6 @@
       "integrity": "sha512-ZwTHAlC9akprWDinwEPD4kOuwaYZlyMwVJIANsKNC3QVp0AHB04m7RnB4eqeWfgmxw8MGTzS9uMaw93Z3QcZbw==",
       "dev": true
     },
-    "ansi-regex": {
-      "version": "2.1.1",
-      "resolved": "https://registry.npmjs.org/ansi-regex/-/ansi-regex-2.1.1.tgz",
-      "integrity": "sha1-w7M6te42DYbg5ijwRorn7yfWVN8=",
-      "dev": true
-    },
     "array-from": {
       "version": "2.1.1",
       "resolved": "https://registry.npmjs.org/array-from/-/array-from-2.1.1.tgz",
