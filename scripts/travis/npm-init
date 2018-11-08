@@ -9,8 +9,11 @@ if [ ${TEST_SUITE} == "standard" ]; then
 fi
 
 npm install -g grunt-cli
-npm --prefix shared-libs/phone-number install
-npm prune
 npm install
 npm ls || true
+npm --prefix webapp install
+npm --prefix admin install
+npm --prefix api install
+npm --prefix sentinel install
+npm --prefix shared-libs/phone-number install
 node --stack_size=10000 `which grunt` ci-build
