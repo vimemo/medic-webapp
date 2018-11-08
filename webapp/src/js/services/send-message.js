@@ -1,6 +1,6 @@
 var _ = require('underscore'),
   uuid = require('uuid/v4'),
-  taskUtils = require('task-utils'),
+  taskUtils = require('@shared-libs/task-utils'),
   phoneNumber = require('phone-number');
 
 angular

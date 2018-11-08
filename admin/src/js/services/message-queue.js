@@ -1,4 +1,4 @@
-var lineageFactory = require('lineage'),
+var lineageFactory = require('@shared-libs/lineage'),
     messageUtils = require('@shared-libs/message-utils'),
     registrationUtils = require('@shared-libs/registration-utils');
 

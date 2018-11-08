@@ -7,7 +7,7 @@ const sinon = require('sinon'),
   infodoc = require('../../src/lib/infodoc'),
   transitions = require('../../src/transitions'),
   metadata = require('../../src/lib/metadata'),
-  tombstoneUtils = require('@shared-libs/tombstone-utils');
+  tombstoneUtils = require('tombstone-utils');
 
 describe('transitions', () => {
   afterEach(() => {

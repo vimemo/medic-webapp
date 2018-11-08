@@ -28,7 +28,7 @@
     "pouchdb-browser": "^7.0.0",
     "properties": "^1.2.1",
     "@shared-libs/registration-utils": "file:../shared-libs/registration-utils",
-    "lineage": "file:../shared-libs/lineage",
+    "@shared-libs/lineage": "file:../shared-libs/lineage",
     "select2": "^4.0.3",
     "simple-password-tester": "^1.0.0",
     "underscore": "^1.9.1"

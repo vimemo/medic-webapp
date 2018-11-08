@@ -2,8 +2,8 @@ const db = require('../../../src/db-pouch'),
       sinon = require('sinon'),
       config = require('../../../src/config'),
       auth = require('../../../src/auth'),
-      tombstoneUtils = require('@shared-libs/tombstone-utils'),
-      viewMapUtils = require('@shared-libs/view-map-utils'),
+      tombstoneUtils = require('tombstone-utils'),
+      viewMapUtils = require('view-map-utils'),
       service = require('../../../src/services/authorization');
 
 require('chai').should();
@@ -693,4 +693,3 @@ describe('Authorization service', () => {
     });
   });
 });
-
