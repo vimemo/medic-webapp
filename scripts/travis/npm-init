@@ -11,9 +11,7 @@ fi
 npm install -g grunt-cli
 npm install
 npm ls || true
-npm --prefix webapp install
-npm --prefix admin install
-npm --prefix api install
-npm --prefix sentinel install
-npm --prefix shared-libs/phone-number install
+node --version
+npm --version
+cd shared-libs/phone-number && npm install && cd ../..
 node --stack_size=10000 `which grunt` ci-build
