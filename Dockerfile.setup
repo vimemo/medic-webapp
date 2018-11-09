@@ -1,0 +1,50 @@
+#
+# ---- Base Node ----
+FROM alpine AS base
+
+# Add packages
+RUN apk add --update --no-cache \
+  build-base \
+  nodejs-current \
+  python \
+  python-dev \
+  py-pip \
+  curl \
+  yarn \
+  npm \
+  tzdata
+
+WORKDIR /app
+
+# Install
+COPY ./shared-libs ./shared-libs
+COPY package.json ./package.json
+COPY ./webapp/package.json ./webapp/package.json
+
+
+#
+# ---- Dependencies ----
+From base AS dependencies
+# install deps
+RUN yarn --silent
+RUN cd webapp && yarn --silent
+
+#
+# ---- Test ----
+from dependencies as test
+WORKDIR /app
+COPY ddocs ./ddocs
+COPY webapp ./webapp
+COPY admin ./admin
+COPY api ./api
+COPY sentinel ./sentinel
+COPY Gruntfile.js ./
+COPY ./docker/app ./docker/app
+
+RUN yarn global add grunt-cli
+
+# Expose port
+#EXPOSE 5988
+
+# Start up
+CMD ["./docker/app/startup.sh"]

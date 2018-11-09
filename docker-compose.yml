@@ -1,0 +1,102 @@
+version: '2'
+
+networks:
+  medic-net:
+    driver: bridge
+
+volumes:
+  medic-data:
+    external: true
+
+services:
+  couchdb:
+    # build: ./docker/couchdb
+    image: couchdb:2.2.0
+    env_file: docker/couchdb/.couch-env
+    container_name: couchdb
+    restart: always
+    # command: /opt/couchdb/scripts/setup.sh
+    volumes:
+      # - ./docker/couchdb/etc/local.ini:/opt/couchdb/etc/local.ini
+      # - ./docker/couchdb/scripts:/opt/couchdb/scripts/
+      - medic-data:/opt/couchdb/data
+    networks:
+      - medic-net
+
+  haproxy:
+    build: ./docker/haproxy
+    container_name: haproxy
+    ports:
+      - 5984:5984
+      - 5986:5986
+    depends_on:
+      - couchdb
+    networks:
+      - medic-net
+
+  setup:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.setup
+    container_name: setup
+    volumes:
+      - ./ddocs:/app/ddocs
+      - ./docker/app:/app/docker/app
+    environment:
+      COUCH_URL: 'http://admin:pass@haproxy:5984/medic'
+      COUCH_NODE_NAME: 'couchdb@localhost'
+    depends_on:
+      - haproxy
+    networks:
+      - medic-net
+
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.api
+    container_name: api
+    ports:
+      - 5988:5988
+    volumes:
+      - ./api/src:/app/api/src
+      - ./api/server.js:/app/api/server.js
+      - ./shared-libs:/app/shared-libs
+      - ./docker/api:/app/docker/api
+    environment:
+      COUCH_URL: 'http://admin:pass@haproxy:5984/medic'
+      COUCH_NODE_NAME: 'couchdb@localhost'
+    depends_on:
+      - setup
+    networks:
+      - medic-net
+
+  sentinel:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.sentinel
+    container_name: sentinel
+    volumes:
+      - ./sentinel/src:/app/sentinel/src
+      - ./sentinel/server.js:/app/sentinel/server.js
+      - ./shared-libs:/app/shared-libs
+      - ./docker/sentinel:/app/docker/sentinel
+    environment:
+      COUCH_URL: 'http://admin:pass@haproxy:5984/medic'
+      COUCH_NODE_NAME: 'couchdb@localhost'
+    depends_on:
+      - api
+    networks:
+      - medic-net
+
+  app:
+    build: .
+    container_name: medicapp
+    volumes:
+      - ./webapp/src:/app/webapp/src
+      - ./admin/src:/app/admin/src
+      - ./shared-libs:/app/shared-libs
+    depends_on:
+      - api
+      - sentinel
+    networks:
+      - medic-net

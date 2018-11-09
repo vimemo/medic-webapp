@@ -63,7 +63,7 @@ module.exports = function(grunt) {
           pass: 'pass',
         },
         files: {
-          'http://localhost:5984/medic': 'build/ddocs/medic.json',
+          'http://haproxy:5984/medic': 'build/ddocs/medic.json',
         },
       },
       // push just the secondary ddocs to save time in dev
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
           pass: 'pass',
         },
         files: {
-          'http://localhost:5984/medic':
+          'http://haproxy:5984/medic':
             'build/ddocs/medic/_attachments/ddocs/compiled.json',
         },
       },
@@ -83,7 +83,7 @@ module.exports = function(grunt) {
           pass: 'pass',
         },
         files: {
-          'http://localhost:5984/medic-test': 'build/ddocs/medic.json',
+          'http://haproxy:5984/medic-test': 'build/ddocs/medic.json',
         },
       },
       staging: {
@@ -393,18 +393,18 @@ module.exports = function(grunt) {
       },
       'setup-admin': {
         cmd:
-          'curl -X PUT http://localhost:5984/_node/${COUCH_NODE_NAME}/_config/admins/admin -d \'"pass"\'' +
-          ' && curl -X POST http://admin:pass@localhost:5984/_users ' +
+          'curl -X PUT http://haproxy:5984/_node/${COUCH_NODE_NAME}/_config/admins/admin -d \'"pass"\'' +
+          ' && curl -X POST http://admin:pass@haproxy:5984/_users ' +
           ' -H "Content-Type: application/json" ' +
           ' -d \'{"_id": "org.couchdb.user:admin", "name": "admin", "password":"pass", "type":"user", "roles":[]}\' ' +
-          ' && curl -X PUT --data \'"true"\' http://admin:pass@localhost:5984/_node/${COUCH_NODE_NAME}/_config/chttpd/require_valid_user' +
-          ' && curl -X PUT --data \'"4294967296"\' http://admin:pass@localhost:5984/_node/${COUCH_NODE_NAME}/_config/httpd/max_http_request_size',
+          ' && curl -X PUT --data \'"true"\' http://admin:pass@haproxy:5984/_node/${COUCH_NODE_NAME}/_config/chttpd/require_valid_user' +
+          ' && curl -X PUT --data \'"4294967296"\' http://admin:pass@haproxy:5984/_node/${COUCH_NODE_NAME}/_config/httpd/max_http_request_size',
       },
       'reset-test-databases': {
         stderr: false,
         cmd: ['medic-test', 'medic-test-audit']
           .map(
-            name => `curl -X DELETE http://admin:pass@localhost:5984/${name}`
+            name => `curl -X DELETE http://admin:pass@haproxy:5984/${name}`
           )
           .join(' && '),
       },

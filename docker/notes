@@ -1,0 +1,1 @@
+#http-request set-header X-Medic-UserCtx %[req.cook(userCtx)]

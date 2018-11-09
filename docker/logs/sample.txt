@@ -1,0 +1,13 @@
+haproxy    | Oct 23 11:26:39 baab393a7015 haproxy[22]: 172.27.0.1,201,POST,/medic/_bulk_docs,api,-,{"docs":[{"_attachments":{"css/main.css":{"data":"LyohCiAqIEJvb3RzdHJhcCB2My4zLjcgKGh0dHA6Ly9nZXRib290c3RyYXAuY29tKQogKiBDb3B5cmlnaHQgMjAxMS0yMDE2IFR3aXR0ZXIsIEluYy4KICogTGljZW5zZWQgdW5kZXIgTUlUIChodHRwczovL2dpdGh1Yi5jb20vdHdicy9ib290c3RyYXAvYmxvYi9tYXN0ZXIvTElDRU5TRSkKICovCi8qISBub3JtYWxpemUuY3NzIHYzLjAuMyB8IE1JVCBMaWNlbnNlIHwgZ2l0aHViLmNvbS9uZWNvbGFzL25vcm1hbGl6ZS5jc3MgKi8KaHRtbCB7CiAgZm9udC1mYW1pbHk6IHNhbnMtc2VyaWY7CiAgLW1zLXRleHQtc2l6ZS1hZGp1c3Q6IDEwMCU7CiAgLXdlYmtpdC10ZXh0LXNpemUtYWRqdXN0OiAxMDAlOwp9CmJvZHkgewogIG1hcmdpbjogMDsKfQphcnRpY2xlLAphc2lkZSwKZGV0YWlscywKZmlnY2FwdGlvbiwKZmlndXJlLApmb290ZXIsCmhlYWRlciwKaGdyb3VwLAptYWluLAptZW51LApuYXYsCnNlY3Rpb24sCnN1bW1hcnkgewogIGRpc3BsYXk6IGJsb2NrOwp9CmF1ZGlvLApjYW52YXMsCnByb2dyZXNzLAp2aWRlbyB7CiAgZGlzcGxheTogaW5saW5lLWJsb2NrOwogIHZlcnRpY2FsLWFsaWduOiBiYXNlbGluZTsKfQphdWRpbzpub3QoW2NvbnRyb2xzXSkgewogIGRpc3BsYXk6IG5vbmU7CiAgaGVpZ2h0OiAwOwp9CltoaWRkZW5dLAp0ZW1wbGF0ZSB7CiAgZGlzcGxheTogbm9
+haproxy    | Oct 23 11:26:39 baab393a7015 haproxy[22]: 172.27.0.1,200,GET,/medic/_design/medic?,api,-,-,16407,5,16105
+haproxy    | Oct 23 11:26:39 baab393a7015 haproxy[22]: 172.27.0.1,200,GET,/medic/settings?,api,-,-,4387,7,4087
+haproxy    | Oct 23 11:26:39 baab393a7015 haproxy[22]: 172.27.0.1,200,GET,/medic/,api,-,-,761,3,506
+haproxy    | Oct 23 11:26:39 baab393a7015 haproxy[22]: 172.27.0.1,200,GET,/medic/_design/medic?,api,-,-,16407,6,16105
+haproxy    | Oct 23 11:26:39 baab393a7015 haproxy[22]: 172.27.0.1,200,GET,/medic/_design/medic/translations/messages-es.properties,api,-,-,60101,10,59797
+haproxy    | Oct 23 11:26:39 baab393a7015 haproxy[22]: 172.27.0.1,200,GET,/medic/_design/medic/translations/messages-bm.properties,api,-,-,47833,10,47529
+haproxy    | Oct 23 11:26:39 baab393a7015 haproxy[22]: 172.27.0.1,200,GET,/medic/_design/medic/translations/messages-sw.properties,api,-,-,72243,9,71939
+haproxy    | Oct 23 11:26:39 baab393a7015 haproxy[22]: 172.27.0.1,200,GET,/medic/_design/medic/translations/messages-id.properties,api,-,-,72308,11,72004
+haproxy    | Oct 23 11:26:39 baab393a7015 haproxy[22]: 172.27.0.1,200,GET,/medic/_design/medic/translations/messages-en.properties,api,-,-,73061,11,72757
+haproxy    | Oct 23 11:26:39 baab393a7015 haproxy[22]: 172.27.0.1,200,GET,/medic/_design/medic/translations/messages-fr.properties,api,-,-,75883,11,75579
+haproxy    | Oct 23 11:26:39 baab393a7015 haproxy[22]: 172.27.0.1,200,GET,/medic/_design/medic/translations/messages-ne.properties,api,-,-,72325,11,72021
+haproxy    | Oct 23 11:26:39 baab393a7015 haproxy[22]: 172.27.0.1,200,GET,/medic/_design/medic/translations/messages-hi.properties,api,-,-,124107,10,123802

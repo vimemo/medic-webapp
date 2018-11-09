@@ -23,7 +23,7 @@ const waitForApi = () =>
     //
     const waitLoop = () => {
       request(
-        `http://localhost:${process.env.API_PORT || 5988}/setup/poll`,
+        `http://api:${process.env.API_PORT || 5988}/setup/poll`,
         (err, response, body) => {
           if (err) {
             logger.info('Waiting for API to be ready...');
