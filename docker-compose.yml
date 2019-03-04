@@ -11,7 +11,7 @@ volumes:
 services:
   couchdb:
     # build: ./docker/couchdb
-    image: couchdb:2.2.0
+    image: couchdb:2
     env_file: docker/couchdb/.couch-env
     container_name: couchdb
     restart: always
